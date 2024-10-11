@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "4000:4000"
+    environment:
+      - 'DB_USER=${DB_USER}'
+      - 'DB_HOST=${DB_HOST}'
+      - 'DB_DATABASE=${DB_DATABASE}'
+      - 'DB_PORT=${DB_PORT}'
+      - 'DB_PASSWORD=${DB_PASSWORD}'
+      - 'API_PORT=${API_PORT}'
+      - 'JWT_SECRET=${JWT_SECRET}'
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - '3000:80' # Mapping the Nginx port to your host machine's port 3000
+    environment:
+      - VITE_API_URL=${VITE_API_URL}
+    env_file:
+      - ./.env

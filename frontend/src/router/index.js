@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Dashboard from '@/views/Dashboard.vue';
 import Admin from '@/views/Admin.vue';
+import LiveUpdates from '@/views/LiveUpdates.vue';
 
 const routes = [
   {
@@ -13,6 +14,11 @@ const routes = [
     name: 'Admin',
     component: Admin,
     meta: { requiresAuth: true },
+  },
+  {
+    path: '/live-updates',
+    name: 'LiveUpdates',
+    component: LiveUpdates,
   },
 ];
 

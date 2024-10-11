@@ -27,3 +27,10 @@ CREATE TABLE f1_app.users (
     password_hash VARCHAR(255) NOT NULL
 );
 
+-- Table for drivers
+CREATE TABLE f1_app.drivers (
+    id SERIAL PRIMARY KEY,
+    driver_name VARCHAR(255) NOT NULL,
+    team_id INT NOT NULL,
+    FOREIGN KEY (team_id) REFERENCES f1_app.team(id)
+);

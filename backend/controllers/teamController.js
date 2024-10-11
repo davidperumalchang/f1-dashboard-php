@@ -1,5 +1,7 @@
 const db = require('../database/db');
 
+// API ROUTES
+
 // Retrieve teams
 exports.getTeams = async (req, res) => {
     try {
@@ -62,3 +64,16 @@ exports.updateTeamStandings = async (req, res) => {
         res.status(500).json({ success: false, message: 'Error updating team standings.' });
     }
 };
+
+// END API ROUTES
+
+
+// HELPER FUNCTIONS
+
+// Retrieve team by id
+exports.getTeamById = async (teamId) => {
+    const result = await db.query('SELECT * FROM f1_app.team WHERE id = $1', [teamId]);
+    return result.rows[0];
+};
+
+// END HELPER FUNCTIONS

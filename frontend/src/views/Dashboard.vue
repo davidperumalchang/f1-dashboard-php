@@ -5,6 +5,9 @@
         <span class="navbar-brand">
           <font-awesome-icon :icon="['fas', 'flag-checkered']" class="me-2" />F1 Dashboard
         </span>
+        <router-link to="/live-updates" class="btn btn-outline-light me-auto ms-3">
+          <font-awesome-icon :icon="['fas', 'chart-line']" class="me-2" />Live Updates
+        </router-link>
         <button @click="handleAdminClick" class="btn btn-outline-light">
           <font-awesome-icon :icon="['fas', 'cog']" class="me-2" />Admin Panel
         </button>
@@ -41,7 +44,12 @@
       </div>
     </div>
 
-    <LoginModal v-if="showLoginModal" @login-success="onLoginSuccess" @login-error="onLoginError" />
+    <LoginModal 
+      v-if="showLoginModal"
+      @login-success="onLoginSuccess" 
+      @login-error="onLoginError"
+      @close="closeLoginModal"
+    />
   </div>
 </template>
 
@@ -82,11 +90,16 @@ export default {
       alert(errorMessage);
     };
 
+    const closeLoginModal = () => {
+      showLoginModal.value = false;
+    };
+
     return {
       showLoginModal,
       handleAdminClick,
       onLoginSuccess,
       onLoginError,
+      closeLoginModal,
     };
   },
 };

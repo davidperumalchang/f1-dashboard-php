@@ -8,6 +8,7 @@ const path = require('path');
 const eventScheduleRoutes = require('./routes/eventScheduleRoutes');
 const teamRoutes = require('./routes/teamRoutes');
 const authRoutes = require('./routes/authRoutes');
+const liveupdateRoutes = require('./routes/liveupdateRoute');
 
 require('dotenv').config({ path: path.resolve(__dirname, '../../.env') });
 
@@ -21,6 +22,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api/event', eventScheduleRoutes);
 app.use('/api/team', teamRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/liveupdate', liveupdateRoutes);
 
 const PORT = process.env.API_PORT || 4000;
 
