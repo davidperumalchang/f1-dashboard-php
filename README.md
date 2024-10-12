@@ -24,7 +24,7 @@ F1 Dashboard is a web application that provides real-time updates and management
 
 ## DB Diagram
 
-<img src="./documentation/db_diagram.png width="700" />
+<img src="./documentation/db_diagram.png" width="700" />
 
 ## Setup and Installation
 
