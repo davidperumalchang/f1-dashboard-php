@@ -1,5 +1,3 @@
-version: '3.3'
-
 services:
   backend:
     build:
@@ -19,7 +17,3 @@ services:
       context: ./frontend
     ports:
       - '7001:80' # Mapping the Nginx port to host machine's port 7001
-    environment:
-      - VITE_API_URL=${VITE_API_URL}
-    env_file:
-      - ./.env
