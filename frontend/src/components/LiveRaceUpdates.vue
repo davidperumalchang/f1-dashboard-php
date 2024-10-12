@@ -1,6 +1,7 @@
 <template>
   <div class="live-race-updates">
     <h2 class="title">{{ raceData?.raceInfo.status === 'Finished' ? 'Race Results' : 'Live Race Updates' }}</h2>
+    <p class="text-center update-frequency">Updated every 0.5s</p>
     <div v-if="raceData" class="race-content">
       <div class="race-info">
         <h3>{{ raceData.raceInfo.name }}</h3>
@@ -105,7 +106,7 @@ export default {
 
     onMounted(() => {
       console.log('Mounting component');
-      eventSource = new EventSource(`${import.meta.env.VITE_API_URL}/liveupdate`);
+      eventSource = new EventSource(`${import.meta.env.VITE_API_URL}/api/liveupdate`);
 
       eventSource.onmessage = (event) => {
         console.log('Received message:', event.data);
@@ -153,7 +154,7 @@ export default {
 .title {
   color: #333;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 
 .race-content {
@@ -288,5 +289,13 @@ th {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.update-frequency {
+  padding: 0; 
+  margin: 0; 
+  font-style: italic; 
+  font-size: 0.8em;
+  margin-bottom: 20px;
 }
 </style>

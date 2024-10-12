@@ -79,7 +79,7 @@ VITE_API_URL=
 
 Sample
 ```
-VITE_API_URL=http://localhost:4000/api
+VITE_API_URL=http://localhost:4000
 ```
 
 ### **Step 3: Build and Run the Application**
