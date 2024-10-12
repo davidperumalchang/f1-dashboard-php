@@ -28,8 +28,8 @@ export default {
   updateTeamPoints(team) {
     return apiClient.put('/team/update', team);
   },
-  getTeamDetails(team_name) {
-    return apiClient.get(`/team/${team_name}`);
+  getTeamDetails(id) {
+    return apiClient.get(`/team/${id}`);
   },
   login(email, password) {
     return apiClient.post('/auth/login', { email, password });

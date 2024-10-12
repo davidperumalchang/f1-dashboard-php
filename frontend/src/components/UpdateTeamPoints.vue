@@ -2,16 +2,16 @@
   <div class="update-team-points d-flex flex-column h-100">
     <form @submit.prevent="updateTeamPoints" class="needs-validation flex-grow-1 d-flex flex-column" novalidate>
       <div class="mb-3">
-        <label for="team_name" class="form-label">Team Name</label>
+        <label for="team_id" class="form-label">Team Name</label>
         <select 
-          v-model="selectedTeamName" 
+          v-model="selectedTeamId" 
           class="form-select" 
-          id="team_name" 
+          id="team_id" 
           required
           @change="onTeamSelect"
         >
           <option value="" disabled>Select a team</option>
-          <option v-for="team in teams" :key="team.id" :value="team.team_name">
+          <option v-for="team in teams" :key="team.id" :value="team.id">
             {{ team.team_name }}
           </option>
         </select>
@@ -72,8 +72,9 @@ import api from '@/services/api';
 export default {
   data() {
     return {
-      selectedTeamName: '',
+      selectedTeamId: '',
       team: {
+        id: '',
         team_name: '',
         points: 0,
         wins: 0,
@@ -92,9 +93,9 @@ export default {
   },
   methods: {
     async onTeamSelect() {
-      if (this.selectedTeamName) {
+      if (this.selectedTeamId) {
         try {
-          const response = await api.getTeamDetails(this.selectedTeamName);
+          const response = await api.getTeamDetails(this.selectedTeamId);
           this.team = response.data.teamDetails;
         } catch (error) {
           console.error('Error fetching team details:', error);
@@ -111,8 +112,9 @@ export default {
       }
     },
     resetForm() {
-      this.selectedTeamName = '';
+      this.selectedTeamId = '';
       this.team = {
+        id: '',
         team_name: '',
         points: 0,
         wins: 0,

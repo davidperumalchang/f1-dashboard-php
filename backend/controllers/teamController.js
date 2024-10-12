@@ -9,7 +9,7 @@ exports.getTeams = async (req, res) => {
         const teams = result.rows;
         res.json({ success: true, teams });
     } catch (error) {
-        res.status(500).json({ success: false, message: 'Error retrieving team standings.' });
+        res.status(500).json({ success: false, message: 'Error retrieving team.' });
     }
 };
 
@@ -26,9 +26,9 @@ exports.getTeamStandings = async (req, res) => {
 
 // Retrieve team details
 exports.getTeamDetails = async (req, res) => {
-    const { team_name } = req.params;
+    const { id } = req.params;
     try {
-        const result = await db.query('SELECT * FROM f1_app.team WHERE team_name = $1', [team_name]);
+        const result = await db.query('SELECT * FROM f1_app.team WHERE id = $1', [id]);
         const teamDetails = result.rows[0];
         res.json({ success: true, teamDetails });
     } catch (error) {
@@ -36,7 +36,7 @@ exports.getTeamDetails = async (req, res) => {
     }
 };
 
-// Add new team to standings
+// Add new team
 exports.addTeam = async (req, res) => {
     const { team_name, points, wins, podiums } = req.body;
     try {
@@ -46,7 +46,7 @@ exports.addTeam = async (req, res) => {
         );
         res.json({ success: true });
     } catch (error) {
-        res.status(500).json({ success: false, message: 'Error adding team to standings.' });
+        res.status(500).json({ success: false, message: 'Error adding team.' });
     }
 };
 

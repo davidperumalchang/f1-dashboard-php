@@ -6,6 +6,12 @@ const db = require('../database/db');
 exports.register = async (req, res) => {
     const { email, password } = req.body;
     try {
+        // Check if the email already exists
+        const existingUser = await db.query('SELECT * FROM f1_app.users WHERE email = $1', [email]);
+        if (existingUser.rows.length > 0) {
+            return res.status(409).json({ success: false, message: 'User with this email already exists.' });
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10);
         const result = await db.query(
             'INSERT INTO f1_app.users (email, password_hash) VALUES ($1, $2) RETURNING id',

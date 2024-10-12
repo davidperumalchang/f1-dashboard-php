@@ -15,21 +15,56 @@ const authController = require('../controllers/authController');
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - email
+ *               - username
+ *               - password
  *             properties:
  *               email:
  *                 type: string
+ *                 format: email
  *                 example: user@example.com
  *               username:
  *                 type: string
+ *                 minLength: 3
+ *                 maxLength: 30
  *                 example: user123
  *               password:
  *                 type: string
- *                 example: password
+ *                 format: password
+ *                 minLength: 8
+ *                 example: password123
  *     responses:
  *       201:
  *         description: User registered successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: User registered successfully
  *       400:
  *         description: Invalid input
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Invalid input data
+ *       409:
+ *         description: User already exists
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: User with this email or username already exists
  */
 router.post('/register', authController.register);
 
@@ -46,13 +81,18 @@ router.post('/register', authController.register);
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - email
+ *               - password
  *             properties:
  *               email:
  *                 type: string
+ *                 format: email
  *                 example: user@example.com
  *               password:
  *                 type: string
- *                 example: password
+ *                 format: password
+ *                 example: password123
  *     responses:
  *       200:
  *         description: Login successful
@@ -63,10 +103,30 @@ router.post('/register', authController.register);
  *               properties:
  *                 success:
  *                   type: boolean
+ *                   example: true
  *                 token:
  *                   type: string
+ *                   example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+ *       400:
+ *         description: Bad request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Invalid input data
  *       401:
  *         description: Invalid credentials
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: Invalid email or password
  */
 router.post('/login', authController.login);
 

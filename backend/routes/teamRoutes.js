@@ -26,19 +26,27 @@ const verifyToken = require('../middlewares/verifyToken');
  *                   items:
  *                     type: object
  *                     properties:
- *                       teamName:
+ *                       id:
+ *                         type: integer
+ *                         example: 1
+ *                       team_name:
  *                         type: string
- *                       points:
- *                         type: number
- *                       wins:
- *                         type: number
- *                       podiums:
- *                         type: number
  *               required:
  *                 - success
  *                 - teams
  *       500:
- *         description: Error retrieving teams
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: Error retrieving teams
  */
 router.get('/', teamController.getTeams);
 
@@ -51,23 +59,34 @@ router.get('/', teamController.getTeams);
  *     summary: Add new team
  *     tags:
  *       - Team
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - team_name
+ *               - points
+ *               - wins
+ *               - podiums
  *             properties:
- *               teamName:
+ *               team_name:
  *                 type: string
+ *                 example: "Red Bull Racing"
  *               points:
  *                 type: number
+ *                 example: 287
  *               wins:
  *                 type: number
+ *                 example: 5
  *               podiums:
  *                 type: number
+ *                 example: 8
  *     responses:
- *       200:
+ *       201:
  *         description: Team added successfully
  *         content:
  *           application/json:
@@ -76,8 +95,49 @@ router.get('/', teamController.getTeams);
  *               properties:
  *                 success:
  *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Team added successfully
+ *       400:
+ *         description: Bad request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Invalid input data"
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Unauthorized access"
  *       500:
  *         description: Error adding team
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Error adding team"
  */
 router.post('/new', verifyToken, teamController.addTeam);
 
@@ -89,21 +149,32 @@ router.post('/new', verifyToken, teamController.addTeam);
  *     summary: Update team standings
  *     tags:
  *       - Team
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - team_name
+ *               - points
+ *               - wins
+ *               - podiums
  *             properties:
- *               teamName:
+ *               team_name:
  *                 type: string
+ *                 example: "Red Bull Racing"
  *               points:
  *                 type: number
+ *                 example: 287
  *               wins:
  *                 type: number
+ *                 example: 5
  *               podiums:
  *                 type: number
+ *                 example: 8
  *     responses:
  *       200:
  *         description: Team standings updated successfully
@@ -114,8 +185,49 @@ router.post('/new', verifyToken, teamController.addTeam);
  *               properties:
  *                 success:
  *                   type: boolean
+ *                   example: true
+ *                 message:
+ *                   type: string
+ *                   example: Team standings updated successfully
+ *       400:
+ *         description: Bad request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Invalid input data"
+ *       401:
+ *         description: Unauthorized
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Unauthorized access"
  *       500:
- *         description: Error updating team standings
+ *         description: Error updating team
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Error updating team"
  */
 router.put('/update', verifyToken, teamController.updateTeamStandings);
 
@@ -137,41 +249,71 @@ router.put('/update', verifyToken, teamController.updateTeamStandings);
  *               properties:
  *                 success:
  *                   type: boolean
+ *                   example: true
  *                 teamStandings:
  *                   type: array
  *                   items:
  *                     type: object
  *                     properties:
- *                       teamName:
+ *                       team_name:
  *                         type: string
+ *                         example: "Red Bull Racing"
  *                       points:
  *                         type: number
+ *                         example: 287
  *                       wins:
  *                         type: number
+ *                         example: 5
  *                       podiums:
  *                         type: number
+ *                         example: 8
  *               required:
  *                 - success
  *                 - teamStandings
+*       400:
+ *         description: Bad request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Invalid input data"
  *       500:
  *         description: Error retrieving team standings
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Error retrieving team standings"
  */
 router.get('/standings', teamController.getTeamStandings);
 
 // Retrieve team details
 /**
  * @openapi
- * /api/team/{teamName}:
+ * /api/team/{id}:
  *   get:
  *     summary: Retrieve team details
  *     tags:
  *       - Team 
  *     parameters:
- *       - name: teamName
+ *       - name: id
  *         in: path
- *         description: Name of the team
+ *         description: ID of the team
  *         required: true
- *         type: string
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
  *         description: Team details retrieved successfully
@@ -182,13 +324,56 @@ router.get('/standings', teamController.getTeamStandings);
  *               properties:
  *                 success:
  *                   type: boolean
+ *                   example: true
  *                 teamDetails:
  *                   type: object
- *
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     team_name:
+ *                       type: string
+ *                       example: "Red Bull Racing"
+ *                     points:
+ *                       type: number
+ *                       example: 287
+ *                     wins:
+ *                       type: number
+ *                       example: 5
+ *                     podiums:
+ *                       type: number
+ *                       example: 8
+ *               required:
+ *                 - success
+ *                 - teamDetails
+*       400:
+ *         description: Bad request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Invalid input data"
  *       500:
- *         description: Error retrieving team details
+ *         description: Error adding event to schedule
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 message:
+ *                   type: string
+ *                   example: "Error retrieving team"
  */
-router.get('/:team_name', teamController.getTeamDetails);
+router.get('/:id', teamController.getTeamDetails);
 
 
 module.exports = router;
