@@ -17,18 +17,12 @@ const authController = require('../controllers/authController');
  *             type: object
  *             required:
  *               - email
- *               - username
  *               - password
  *             properties:
  *               email:
  *                 type: string
  *                 format: email
  *                 example: user@example.com
- *               username:
- *                 type: string
- *                 minLength: 3
- *                 maxLength: 30
- *                 example: user123
  *               password:
  *                 type: string
  *                 format: password
@@ -64,7 +58,7 @@ const authController = require('../controllers/authController');
  *               properties:
  *                 error:
  *                   type: string
- *                   example: User with this email or username already exists
+ *                   example: User with this email already exists
  */
 router.post('/register', authController.register);
 

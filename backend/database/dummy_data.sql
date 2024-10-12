@@ -51,6 +51,10 @@ INSERT INTO f1_app.drivers (driver_name, team_id) VALUES
 ('Yuki Tsunoda', 11),
 ('Kevin Magnussen', 12),
 ('Nico Hulkenberg', 13),
-('Valtteri Bottas', 17),
-('Alexander Albon', 22),
-('Nicholas Latifi', 23);
+('Valtteri Bottas', 1),
+('Alexander Albon', 6),
+('Nicholas Latifi', 5);
+
+-- First admin user
+INSERT INTO f1_app.users (email, password_hash) VALUES 
+('admin@f1.com', '$2b$10$v3z88ojvGGUTsFedn6jbN.lrrPZdYXkhelajFlmO7E8RI.yLqkDeq');
