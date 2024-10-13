@@ -19,10 +19,10 @@ export default defineConfig({
   },
   //change port for production
   preview: {
-    port: 7001,
+    port: 80,
   },
 // for dev
   server: {
-    port: 7000,
+    port: 4001,
   },
 })

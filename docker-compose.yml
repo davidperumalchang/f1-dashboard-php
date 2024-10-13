@@ -1,19 +1,15 @@
+version: '3.3'
+
 services:
   backend:
     build:
       context: ./backend
     ports:
-      - "4000:4000"
-    environment:
-      - 'DB_USER=${DB_USER}'
-      - 'DB_HOST=${DB_HOST}'
-      - 'DB_DATABASE=${DB_DATABASE}'
-      - 'DB_PORT=${DB_PORT}'
-      - 'DB_PASSWORD=${DB_PASSWORD}'
-      - 'API_PORT=${API_PORT}'
-      - 'JWT_SECRET=${JWT_SECRET}'
+      - "3000:3000"
+    env_file:
+      - ./backend/.env
   frontend:
     build:
       context: ./frontend
     ports:
-      - '7001:80' # Mapping the Nginx port to host machine's port 7001
+      - '80:80' # Mapping the Nginx port to host machine's port 80
