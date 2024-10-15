@@ -24,6 +24,10 @@ app.use('/api/team', teamRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/liveupdate', liveupdateRoutes);
 
+app.get('/', (req, res) => {
+    res.status(200).send('Backend is running')
+})
+
 const PORT = process.env.API_PORT || 3000;
 
 app.listen(PORT, () => {

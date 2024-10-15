@@ -9,7 +9,7 @@
           <font-awesome-icon :icon="['fas', 'chart-line']" class="me-2" />Live Updates
         </router-link>
         <button @click="handleAdminClick" class="btn btn-outline-light">
-          <font-awesome-icon :icon="['fas', 'cog']" class="me-2" />Admin Panel
+          <font-awesome-icon :icon="['fas', 'cog']" class="me-2" />Admin
         </button>
       </div>
     </nav>

@@ -62,7 +62,7 @@ Sample
 ```
 DB_USER=postgres
 DB_HOST=127.0.0.1
-DB_DATABASE=blog_app_db
+DB_DATABASE=f1_app
 DB_PASSWORD=some_password_123
 DB_PORT=5432
 API_PORT=4000
@@ -103,15 +103,15 @@ make build services=frontend && make run services=frontend
 
 ### **Step 4: Access the API**
 
-The backend API should now be running and accessible at `http://localhost:4000`.
+The backend API should now be running and accessible at `http://localhost:3000`.
 
 ### **Step 5: Access the Web App**
 
-The Bloggerfy web app should now be running and accessible at `http://localhost:3000`.
+The F1 Dasbhboard web app should now be running and accessible at `http://localhost:80`.
 
 ### **API Documentation**
 
-API documentation is generated using Swagger and can be accessed at `http://localhost:4000/api-docs` after the server is up and running.
+API documentation is generated using Swagger and can be accessed at `http://localhost:3000/api-docs` after the server is up and running.
 
 ## Available Make Commands
 

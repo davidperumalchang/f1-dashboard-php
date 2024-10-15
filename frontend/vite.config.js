@@ -17,12 +17,4 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
   },
-  //change port for production
-  preview: {
-    port: 80,
-  },
-// for dev
-  server: {
-    port: 4001,
-  },
 })

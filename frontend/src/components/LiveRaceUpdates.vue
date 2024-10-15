@@ -106,7 +106,7 @@ export default {
 
     onMounted(() => {
       console.log('Mounting component');
-      eventSource = new EventSource(`${import.meta.env.VITE_API_URL}/api/liveupdate`);
+      eventSource = new EventSource(`${import.meta.env.VITE_API_URL}/liveupdate`);
 
       eventSource.onmessage = (event) => {
         console.log('Received message:', event.data);
