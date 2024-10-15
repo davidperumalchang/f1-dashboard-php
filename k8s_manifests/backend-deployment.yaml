@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: f1-app
+  labels:
+    role: backend
+    env: demo
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
+  selector:
+    matchLabels:
+      role: backend
+  template:
+    metadata:
+      labels:
+        role: backend
+    spec:
+      containers:
+      - name: backend
+        image: <image_url>
+        imagePullPolicy: Always
+        env:
+          - name: DB_USER
+            value: <db_user>
+          - name: DB_HOST
+            value: <db_host>
+          - name: DB_DATABASE
+            value: <db_database>
+          - name: DB_PASSWORD
+            value: <db_password>
+          - name: DB_PORT
+            value: <db_port>
+          - name: API_PORT
+            value: <api_port>
+          - name: JWT_SECRET
+            value: <jwt_secret>
+        ports:
+        - containerPort: 3000
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 2
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+             path: /
+             port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
