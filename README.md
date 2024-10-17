@@ -13,8 +13,8 @@ F1 Dashboard is a web application that provides real-time updates and management
 ## Technologies Used
 
 - Frontend: Vue.js 3, Vite, Bootstrap 5
-- Backend: Node.js, Express.js
-- Database: PostgreSQL
+- Backend: PHP, Laravel
+- Database: MySQL
 - API: RESTful API
 - Real-time updates: Server-Sent Events (SSE)
 
@@ -32,54 +32,37 @@ F1 Dashboard is a web application that provides real-time updates and management
 
 - **Docker** installed on your machine.
 - **Docker Compose** installed on your machine.
-- An external PostgreSQL database to connect to.
-    - After creating a database instance, you can use the `schema.sql` file (located at `f1-dashboard/backend/database/schema.sql`) to create DB schema and tables
+- An external MySQL database to connect to.
+    - After creating a database instance, run `php artisan migrate` to create tables, or run `php artisan migrate --seed` to create table with dummy data.
 
 ### **Step 1: Clone the Repository**
 
 Clone this repository to your local machine:
-
 ```bash
-git clone https://github.com/davidperumalchang/f1-dashboard.git
-cd f1-dashboard/
+git https://github.com/davidperumalchang/f1-dashboard-php.git
+cd f1-dashboard-php/
 ```
 
 ### **Step 2: Configure Backend Environment Variables**
 
-Modify the `.env` file in the root directory (`f1-dashboard/`) and configure your environment variables for the following:
+Modify the `.env` file in the root directory (`f1-dashboard-php/`) and configure your environment variables for the following:
 
 ```
-DB_USER=
-DB_HOST=
-DB_DATABASE=
-DB_PASSWORD=
-DB_PORT=
-API_PORT=4000
-JWT_SECRET=
-```
-
-Sample
-```
-DB_USER=postgres
-DB_HOST=127.0.0.1
-DB_DATABASE=f1_app
-DB_PASSWORD=some_password_123
-DB_PORT=5432
-API_PORT=4000
-JWT_SECRET=some_secret_key
+DB_CONNECTION=mysql
+DB_HOST=<db_host>
+DB_PORT=3306
+DB_DATABASE=<db_name>
+DB_USERNAME=<db_username>
+DB_PASSWORD=<db_password>
+JWT_SECRET=<jwt_secret>
 ```
 
 ### **Step 2.1: Configure Front Environment Variables**
 
-Modify the `.env` file in the frontend directory (`f1-dashboard/frontend/`) and configure your environment variables for the following:
+Modify the `.env` file in the frontend directory (`f1-dashboard-php/frontend/`) and configure your environment variables for the following:
 
 ```
-VITE_API_URL=
-```
-
-Sample
-```
-VITE_API_URL=http://localhost:4000
+VITE_API_URL=http://localhost:8000/api/v1/
 ```
 
 ### **Step 3: Build and Run the Application**
@@ -103,15 +86,11 @@ make build services=frontend && make run services=frontend
 
 ### **Step 4: Access the API**
 
-The backend API should now be running and accessible at `http://localhost:3000`.
+The backend API should now be running and accessible at `http://localhost:8000`.
 
 ### **Step 5: Access the Web App**
 
-The F1 Dasbhboard web app should now be running and accessible at `http://localhost:80`.
-
-### **API Documentation**
-
-API documentation is generated using Swagger and can be accessed at `http://localhost:3000/api-docs` after the server is up and running.
+The F1 Dasbhboard web app should now be running and accessible at `http://localhost:5173`.
 
 ## Available Make Commands
 
