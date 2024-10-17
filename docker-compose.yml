@@ -1,15 +1,33 @@
-version: '3.3'
+version: '3.8'
 
 services:
   backend:
     build:
-      context: ./backend
-    ports:
-      - "3000:3000"
-    env_file:
-      - ./backend/.env
+      context: ./backend_php
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend_php:/var/www
+    networks:
+      - app-network
+
   frontend:
     build:
       context: ./frontend
     ports:
-      - '80:80' # Mapping the Nginx port to host machine's port 80
+      - '80:80'
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8000:80"
+    volumes:
+      - ./backend_php:/var/www
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
