@@ -73,7 +73,7 @@ export default {
     const showLoginModal = ref(false);
 
     const handleAdminClick = () => {
-      const token = localStorage.getItem('token');
+      var token = localStorage.getItem('token');
       if (token) {
         router.push('/admin');
       } else {

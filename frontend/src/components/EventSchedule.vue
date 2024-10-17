@@ -32,7 +32,7 @@ export default {
   async mounted() {
     try {
       const response = await api.getEventSchedule();
-      this.events = response.data.eventSchedule;
+      this.events = response;
     } catch (error) {
       console.error('Error fetching event schedule:', error);
     }

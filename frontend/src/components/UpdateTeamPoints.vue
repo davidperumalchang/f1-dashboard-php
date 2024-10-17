@@ -86,7 +86,7 @@ export default {
   async mounted() {
     try {
       const response = await api.getTeams();
-      this.teams = response.data.teams;
+      this.teams = response;
     } catch (error) {
       console.error('Error fetching teams:', error);
     }
@@ -96,7 +96,8 @@ export default {
       if (this.selectedTeamId) {
         try {
           const response = await api.getTeamDetails(this.selectedTeamId);
-          this.team = response.data.teamDetails;
+          console.log(response);
+          this.team = response;
         } catch (error) {
           console.error('Error fetching team details:', error);
         }

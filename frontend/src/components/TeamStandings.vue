@@ -34,7 +34,7 @@ export default {
   async mounted() {
     try {
       const response = await api.getTeamStandings();
-      this.teams = response.data.teamStandings;
+      this.teams = response;
     } catch (error) {
       console.error('Error fetching team standings:', error);
     }

@@ -40,7 +40,7 @@ export default {
     const login = async () => {
       try {
         const response = await api.login(email.value, password.value);
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('token', response.access_token);
         emit('login-success');
       } catch (error) {
         console.error('Login error:', error);

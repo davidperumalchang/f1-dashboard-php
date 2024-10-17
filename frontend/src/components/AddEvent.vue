@@ -2,35 +2,35 @@
   <div class="add-event d-flex flex-column h-100">
     <form @submit.prevent="addEvent" class="needs-validation flex-grow-1 d-flex flex-column" novalidate>
       <div class="mb-3">
-        <label for="eventName" class="form-label">Event Name</label>
+        <label for="event_name" class="form-label">Event Name</label>
         <input 
-          v-model="event.eventName" 
+          v-model="event.event_name" 
           type="text" 
           class="form-control" 
-          id="eventName" 
+          id="event_name" 
           placeholder="e.g. Monaco Grand Prix" 
           required
         >
       </div>
       
       <div class="mb-3">
-        <label for="eventDate" class="form-label">Event Date</label>
+        <label for="event_date" class="form-label">Event Date</label>
         <input 
-          v-model="event.eventDate" 
+          v-model="event.event_date" 
           type="date" 
           class="form-control" 
-          id="eventDate" 
+          id="event_date" 
           required
         >
       </div>
       
       <div class="mb-3">
-        <label for="circuitName" class="form-label">Circuit Name</label>
+        <label for="circuit_name" class="form-label">Circuit Name</label>
         <input 
-          v-model="event.circuitName" 
+          v-model="event.circuit_name" 
           type="text" 
           class="form-control" 
-          id="circuitName" 
+          id="circuit_name" 
           placeholder="e.g. Circuit de Monaco" 
           required
         >
@@ -77,9 +77,9 @@ export default {
   data() {
     return {
       event: {
-        eventName: '',
-        eventDate: '',
-        circuitName: '',
+        event_name: '',
+        event_date: '',
+        circuit_name: '',
         location: '',
         country: '',
       },
@@ -97,9 +97,9 @@ export default {
     },
     resetForm() {
       this.event = {
-        eventName: '',
-        eventDate: '',
-        circuitName: '',
+        event_name: '',
+        event_date: '',
+        circuit_name: '',
         location: '',
         country: '',
       };
