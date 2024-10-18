@@ -9,6 +9,8 @@ services:
       - ./backend_php:/var/www
     networks:
       - app-network
+    env_file:
+      - ./backend_php/.env
 
   frontend:
     build:
@@ -17,6 +19,8 @@ services:
       - '80:80'
     networks:
       - app-network
+    env_file:
+      - ./frontend/.env
 
   nginx:
     image: nginx:alpine
