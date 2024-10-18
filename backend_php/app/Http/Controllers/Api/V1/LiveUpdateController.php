@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 use App\Models\Driver;
 use App\Models\Team;
 use Illuminate\Support\Facades\Log;
+use DateInterval;
 
 class LiveUpdateController extends Controller
 {
@@ -149,12 +150,13 @@ class LiveUpdateController extends Controller
 
     private function formatElapsedTime($milliseconds)
     {
+        $milliseconds = abs($milliseconds);
         $seconds = floor($milliseconds / 1000);
-        $hours = floor($seconds / 3600);
-        $minutes = floor(($seconds % 3600) / 60);
-        $seconds = $seconds % 60;
 
-        return sprintf('%02d:%02d:%02d', $hours, $minutes % 60, $seconds % 60);
+        $interval = new DateInterval("PT{$seconds}S");
+        $interval->f = fmod($milliseconds, 1000) / 1000;
+
+        return $interval->format('%H:%I:%S');
     }
 
 }
