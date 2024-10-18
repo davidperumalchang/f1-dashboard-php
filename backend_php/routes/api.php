@@ -5,26 +5,36 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\EventScheduleController;
 use App\Http\Controllers\Api\V1\TeamController;
 use App\Http\Controllers\Api\V1\LiveUpdateController;
-use App\Http\Controllers\Api\V1\UserAdminController;
+use App\Http\Controllers\Api\V1\UserController;
 
-Route::prefix('v1')->group(function () {    
+Route::prefix('v1')->group(function () {
+    // Public routes
+    Route::post('/register', [UserController::class, 'register']);
+    Route::post('/login', [UserController::class, 'login']);
 
-    # Event routes
-    Route::apiResource('event', EventScheduleController::class);
-
-    # Team routes
-    Route::get('/team/standings', [TeamController::class, 'teamStandings']);
-    Route::apiResource('team', TeamController::class);
-
-    # Live update routes
+    // Live update routes
     Route::get('/liveupdate', [LiveUpdateController::class, 'getLiveUpdate']);
 
-    # User admin routes
-    Route::post('/login', [UserAdminController::class, 'login']);
-    Route::post('/register', [UserAdminController::class, 'register']);
+    Route::get('/team/standings', [TeamController::class, 'teamStandings']);
+    Route::get('/team', [TeamController::class, 'index']);
+    Route::get('/team/{team}', [TeamController::class, 'show']);
 
-    Route::middleware('auth:api')->group(function () {
-        Route::post('/logout', [UserAdminController::class, 'logout']);
-        Route::post('/refresh', [UserAdminController::class, 'refresh']);
+    // Event routes
+    Route::get('/event', [EventScheduleController::class, 'index']);
+    Route::get('/event/{event}', [EventScheduleController::class, 'show']);
+
+    // Protected routes
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::post('/logout', [UserController::class, 'logout']);
+
+        // Event routes
+        Route::post('/event', [EventScheduleController::class, 'store']);
+        Route::put('/event/{event}', [EventScheduleController::class, 'update']);
+        Route::delete('/event/{event}', [EventScheduleController::class, 'destroy']);
+
+        // Team routes
+        Route::post('/team', [TeamController::class, 'store']);
+        Route::put('/team/{team}', [TeamController::class, 'update']);
+        Route::delete('/team/{team}', [TeamController::class, 'destroy']);
     });
 });
